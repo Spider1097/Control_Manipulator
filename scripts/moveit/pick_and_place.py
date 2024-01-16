@@ -1,40 +1,4 @@
 #!/usr/bin/env python3
-########################################################################
-# Software License Agreement (BSD License)
-#
-#  Copyright (c) 2012, Willow Garage, Inc.
-#  All rights reserved.
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions
-#  are met:
-#
-#   * Redistributions of source code must retain the above copyright
-#     notice, this list of conditions and the following disclaimer.
-#   * Redistributions in binary form must reproduce the above
-#     copyright notice, this list of conditions and the following
-#     disclaimer in the documentation and/or other materials provided
-#     with the distribution.
-#   * Neither the name of Willow Garage nor the names of its
-#     contributors may be used to endorse or promote products derived
-#     from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-#  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-#  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-#  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-#  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-#  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-#  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-#  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-#  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-#  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-#  POSSIBILITY OF SUCH DAMAGE.
-######################################################################
-
-# Author: Ioan Sucan, Ridhwan Luthra
-# Contributor: Rick Staa (Translated code from cpp to python)
 
 ## Python standard library imports ##
 import sys
@@ -55,15 +19,7 @@ from moveit_msgs.srv import ApplyPlanningScene
 
 
 def openGripper(posture):
-    """Open the gripper
 
-    Parameters
-    ----------
-    posture : trajectory_msgs.msg.JointTrajectory
-                    Gripper posture.
-    """
-
-    ## - BEGIN_SUB_TUTORIAL open_gripper- ##
     ## Add both finger joints of panda robot ##
     posture.joint_names = [str for i in range(2)]
     posture.joint_names[0] = "panda_finger_joint1"
@@ -75,20 +31,9 @@ def openGripper(posture):
     posture.points[0].positions[0] = 0.04
     posture.points[0].positions[1] = 0.04
     posture.points[0].time_from_start = rospy.Duration(0.5)
-    ## - END_SUB_TUTORIAL - ##
-
-    
 
 def closedGripper(posture):
-    """Close the gripper.
 
-    Parameters
-    ----------
-    posture : trajectory_msgs.msg.JointTrajectory
-                    Gripper posture.
-    """
-
-    ## - BEGIN_SUB_TUTORIAL open_gripper - ##
     ## Add both finger joints of panda robot. ##
     posture.joint_names = [str for i in range(2)]
     posture.joint_names[0] = "panda_finger_joint1"
@@ -100,24 +45,13 @@ def closedGripper(posture):
     posture.points[0].positions[0] = 0.00
     posture.points[0].positions[1] = 0.00
     posture.points[0].time_from_start = rospy.Duration(0.5)
-    ## - END_SUB_TUTORIAL - ##
-
 
 def pick(move_group):
-    """Pick object.
 
-    Parameters
-    ----------
-    Group : moveit_commander.RobotCommander
-                    Moveit_commander move group.
-    """
-
-    ## - BEGIN_SUB_TUTORIAL pick1 - ##
     ## Create a vector of grasps to be attempted, currently only creating single grasp. ##
     # This is essentially useful when using a grasp generator to generate and test multiple grasps.
     grasps = [Grasp() for i in range(1)]
 
-    ## Setting grasp pose ##
     # This is the pose of panda_link8. |br|
     # From panda_link8 to the palm of the eef the distance is 0.058, the cube starts 0.01 before 5.0 (half of the length
     # of the cube). |br|
@@ -133,7 +67,6 @@ def pick(move_group):
     grasps[0].grasp_pose.pose.position.y = 0
     grasps[0].grasp_pose.pose.position.z = 0.5
 
-    ## Setting pre-grasp approach ##
     # Defined with respect to frame_id
     grasps[0].pre_grasp_approach.direction.header.frame_id = "panda_link0"
     # Direction is set as positive x axis
@@ -141,7 +74,6 @@ def pick(move_group):
     grasps[0].pre_grasp_approach.min_distance = 0.095
     grasps[0].pre_grasp_approach.desired_distance = 0.115
 
-    ## Setting post-grasp retreat ##
     # Defined with respect to frame_id
     grasps[0].post_grasp_retreat.direction.header.frame_id = "panda_link0"
     # Direction is set as positive z axis
@@ -151,9 +83,7 @@ def pick(move_group):
 
     ## Setting posture of eef before grasp ##
     openGripper(grasps[0].pre_grasp_posture)
-    ## - END_SUB_TUTORIAL - ##
 
-    ## - BEGIN_SUB_TUTORIAL pick2 - ##
     ## Setting posture of eef during grasp ##
     closedGripper(grasps[0].grasp_posture)
 
@@ -163,23 +93,8 @@ def pick(move_group):
     # Call pick to pick up the object using the grasps given
     move_group.pick("object", grasps)
     
-    ## - END_SUB_TUTORIAL - ##
-
-
 def place(group):
-    """Place object.
 
-    Parameters
-    ----------
-    Group : moveit_commander.RobotCommander
-                    Moveit_commander move group.
-    """
-
-    ## - BEGIN_SUB_TUTORIAL place - ##
-    # TODO(@ridhwanluthra) - Calling place function may lead to "All supplied place locations failed. Retrying last
-    # location in
-    # verbose mode." This is a known issue and we are working on fixing it. |br|
-    # Create a vector of placings to be attempted, currently only creating single place location.
     place_location = [PlaceLocation() for i in range(1)]
 
     ## Setting place location pose ##
@@ -206,7 +121,6 @@ def place(group):
     place_location[0].pre_place_approach.min_distance = 0.095
     place_location[0].pre_place_approach.desired_distance = 0.115
 
-
     closedGripper(place_location[0].post_place_posture)
     
     # Setting post-grasp retreat
@@ -223,20 +137,13 @@ def place(group):
     # Setting posture of eef after placing object
     # Similar to the pick case
     
-
     ## Set support surface as table2 ##
     #group.set_support_surface_name("table2")
 
     ## Call place to place the object using the place locations given. ##
     group.place("object", place_location[0])
-    ## - END_SUB_TUTORIAL - ##
-
 
 def addCollisionObjects(planning_scene_interface):
-    """Add collision objects to the scene."""
-
-    ## - BEGIN_SUB_TUTORIAL table1 - ##
-    # Creating Environment
 
     ## Create vector to hold 3 collision objects. ##
     collision_objects_names = [str for i in range(3)]
@@ -254,9 +161,7 @@ def addCollisionObjects(planning_scene_interface):
     collision_objects[0].pose.position.x = 0.5
     collision_objects[0].pose.position.y = 0
     collision_objects[0].pose.position.z = 0.2
-    ## - END_SUB_TUTORIAL - ##
 
-    ## - BEGIN_SUB_TUTORIAL table2 - ##
     ## Add the second table where we will be placing the cube. ##
     collision_objects_names[1] = "table2"
     collision_objects[1].header.frame_id = "panda_link0"
@@ -280,14 +185,12 @@ def addCollisionObjects(planning_scene_interface):
     collision_objects[2].pose.position.x = 0.5
     collision_objects[2].pose.position.y = 0
     collision_objects[2].pose.position.z = 0.5
-    ## - END_SUB_TUTORIAL - ##
 
     ## Add collision objects to scene ##
     for (name, pose, size) in zip(
             collision_objects_names, collision_objects, collision_object_sizes
     ):
         planning_scene_interface.add_box(name=name, pose=pose, size=size)
-
 
 if __name__ == "__main__":
 
@@ -358,3 +261,4 @@ if __name__ == "__main__":
 
     ## Place ##
     place(move_group)
+

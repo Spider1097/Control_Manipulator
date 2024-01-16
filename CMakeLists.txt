@@ -206,7 +206,15 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-
 catkin_install_python(PROGRAMS scripts/moveit/pick_and_place.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+catkin_install_python(PROGRAMS scripts/techman/multi_pose.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS scripts/techman/basic_code.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
