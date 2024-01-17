@@ -4,14 +4,14 @@ ROS package for manipulator control.
 ![image](https://github.com/Spider1097/Control_Manipulator/assets/118929720/c5cbea40-7921-4aed-b6d4-52114f4a535a)
 
 ## A Set up drone workspace
-First of all, we need to create a workspace.
+First of all, we need to manipulator a workspace.
 
 ```
 mkdir -p ~/manipulator/src
 cd manipulator/src/
 git clone https://github.com/Spider1097/Control_Manipulator.git
-catkin_make
 cd manipulator/
+catkin_make
 source devel/setup.bash
 ```
 
