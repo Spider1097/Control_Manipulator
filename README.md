@@ -9,8 +9,32 @@ First of all, we need to create a workspace.
 ```
 mkdir -p ~/manipulator/src
 cd manipulator/src/
-catkin_create_pkg manipulator std_msgs rospy roscpp sensor_msgs
+git clone https://github.com/Spider1097/Control_Manipulator.git
 catkin_make
 cd manipulator/
 source devel/setup.bash
 ```
+
+## Run basic code for moveit robot(panda)
+  ```
+  rosrun manipulator pick_and_place.py 
+ ```
+  ![image](https://github.com/Spider1097/Control_Manipulator/assets/118929720/f6377581-e447-430d-9a58-63489772e487)
+
+## Run basic code for techman
+```
+  rosrun manipulator basic_code.py 
+ ```
+image
+
+Additionally, you have the option to test it using simulation in Python.
+
+ ```
+ cd manipulator/src/manipulator/scripts/techman/
+ python3 techman_simulation.py
+ python3 techman_simulation_move.py
+ ```
+
+![techman_base](https://github.com/Spider1097/Control_Manipulator/assets/118929720/00066829-2323-42ae-94dd-224078187807)
+
+
