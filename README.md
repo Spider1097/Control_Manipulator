@@ -27,7 +27,7 @@ source devel/setup.bash
  ```
 image
 
-Additionally, you have the option to test it using simulation in Python.
+Additionally, you have the option to test it using simulation in Python or Rviz.
 For this you need to install the roboticstoolbox. " https://github.com/petercorke/robotics-toolbox-python "
  ```
  cd manipulator_ws/src/manipulator/scripts/techman/
@@ -36,5 +36,7 @@ For this you need to install the roboticstoolbox. " https://github.com/petercork
  ```
 
 ![techman_base](https://github.com/Spider1097/Control_Manipulator/assets/118929720/00066829-2323-42ae-94dd-224078187807)
+
+
 
 
