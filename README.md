@@ -16,6 +16,7 @@ source devel/setup.bash
 ```
 
 ## Run basic code for moveit robot(panda)
+How to install moveit you can find here: " https://ros-planning.github.io/moveit_tutorials/doc/getting_started/getting_started.html "
   ```
   roslaunch panda_moveit_config demo.launch
 
