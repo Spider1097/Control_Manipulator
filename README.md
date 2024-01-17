@@ -23,7 +23,9 @@ source devel/setup.bash
  ```
   ![image](https://github.com/Spider1097/Control_Manipulator/assets/118929720/f6377581-e447-430d-9a58-63489772e487)
 
-## Run basic code for techman
+## Run basic code for techman.
+before run this code you must change in code an IP addres and check if you have contact with robot. 
+Here you can find information how to do that: " https://github.com/TechmanRobotInc/tmr_ros1 "
 ```
   rosrun manipulator basic_code.py 
  ```
