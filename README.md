@@ -7,10 +7,10 @@ ROS package for manipulator control.
 First of all, we need to manipulator a workspace.
 
 ```
-mkdir -p ~/manipulator/src
-cd manipulator/src/
+mkdir -p ~/manipulator_ws/src
+cd manipulator_ws/src/
 git clone https://github.com/Spider1097/Control_Manipulator.git
-cd manipulator/
+cd manipulator_ws/
 catkin_make
 source devel/setup.bash
 ```
@@ -30,7 +30,7 @@ image
 Additionally, you have the option to test it using simulation in Python.
 
  ```
- cd manipulator/src/manipulator/scripts/techman/
+ cd manipulator_ws/src/manipulator/scripts/techman/
  python3 techman_simulation.py
  python3 techman_simulation_move.py
  ```
