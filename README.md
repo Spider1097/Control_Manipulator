@@ -28,7 +28,7 @@ source devel/setup.bash
 image
 
 Additionally, you have the option to test it using simulation in Python.
-
+For this you need to install the roboticstoolbox. " https://github.com/petercorke/robotics-toolbox-python "
  ```
  cd manipulator_ws/src/manipulator/scripts/techman/
  python3 techman_simulation.py
