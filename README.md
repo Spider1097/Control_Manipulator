@@ -17,6 +17,8 @@ source devel/setup.bash
 
 ## Run basic code for moveit robot(panda)
   ```
+  roslaunch panda_moveit_config demo.launch
+
   rosrun manipulator pick_and_place.py 
  ```
   ![image](https://github.com/Spider1097/Control_Manipulator/assets/118929720/f6377581-e447-430d-9a58-63489772e487)
