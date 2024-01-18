@@ -30,7 +30,8 @@ Here you can find information how to do that: " https://github.com/TechmanRobotI
 ```
  rosrun manipulator basic_code.py 
  ```
-image
+
+https://github.com/Spider1097/Control_Manipulator/assets/118929720/558fd9ed-ddbe-48bb-8090-a9a7493d7bf1
 
 Additionally, you have the option to test it using simulation in Python or Rviz.
 For this you need to install the roboticstoolbox. " https://github.com/petercorke/robotics-toolbox-python ".
